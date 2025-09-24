@@ -3,7 +3,7 @@ import sequelize from "../../config/databse.js";
 
 class ArticleAttach extends Model {
   static associate(models) {
-    ArticleAttach.belongsTo(models.Atricle, {
+    ArticleAttach.belongsTo(models.Article, {
       foreignKey: "article_id",
     });
   }
@@ -49,7 +49,7 @@ ArticleAttach.init(
       comment: "첨부파일 파일타입",
     },
     imgWidth: {
-      type: DataTypes.INET,
+      type: DataTypes.INTEGER,
       allowNull: false,
       field: "img_height",
       defaultValue: 0,

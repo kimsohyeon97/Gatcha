@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import sequelize from "sequelize";
+import sequelize from "../../config/databse.js";
 
 class ArticleLog extends Model {
   static associate(models) {
@@ -18,24 +18,24 @@ ArticleLog.init(
       allowNull: false,
       comment: "게시물 로그 ID",
     },
-    tableName: {
+    targetTable: {
       type: DataTypes.STRING,
       allowNull: false,
-      field: "table_name",
-      comment: "참조테이블명",
+      field: "target_table",
+      comment: "참조 테이블명",
     },
-    fkId: {
+    targetId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      field: "fk_id",
+      field: "target_id",
       comment: "참조테이블 ID",
     },
-    stateType: {
-      type: DataTypes.CHAR(10),
+    actionType: {
+      type: DataTypes.ENUM,
       allowNull: false,
-      field: "state_type",
+      field: "action_type",
       defaultValue: "insert",
-      comment: "처리상태(insert:입력, update:수정, delete:삭제)",
+      comment: "활동 종류(insert:입력, update:수정, delete:삭제)",
     },
     userId: {
       type: DataTypes.INTEGER,
@@ -55,10 +55,10 @@ ArticleLog.init(
       defaultValue: true,
       comment: "사용여부",
     },
-    createdIp: {
-      type: DataTypes.STRING(15),
+    ipAddress: {
+      type: DataTypes.STRING(45),
       allowNull: false,
-      field: "created_ip",
+      field: "ip_address",
       defaultValue: "127.0.0.1",
       comment: "등록 IP",
     },
@@ -67,7 +67,7 @@ ArticleLog.init(
     sequelize,
     modelName: "ArticleLog",
     tableName: "article_log",
-    timestamps: false,
+    timestamps: true,
   }
 );
 

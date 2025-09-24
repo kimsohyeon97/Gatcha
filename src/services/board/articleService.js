@@ -261,9 +261,9 @@ const updateArticle = async (articleId, user, body, files) => {
     // 게시물 첨부파일 수정
     const attachCount = await articleAttachService.updateAttachments(
       articleId,
-      article.ArticleAttaches,
       files,
-      body.articleIds,
+      article.articleAttaches,
+      body.attachIds,
       { transaction }
     );
 
