@@ -91,3 +91,5 @@ Article.init(
     paranoid: true,
   }
 );
+
+export default Article;
