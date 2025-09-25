@@ -10,6 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@sequelize/postgres": "^7.0.0-alpha.46",
     "cookie": "^1.0.2",
     "cors": "^2.8.5",
     "express": "^5.1.0",
@@ -17,6 +18,7 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.1",
     "nodemon": "^3.1.10",
+    "pg": "^8.16.3",
     "redis": "^5.8.2",
     "sequelize": "^6.37.7",
     "winston": "^3.17.0"

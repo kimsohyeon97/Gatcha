@@ -1,6 +1,6 @@
 import status from "http-status";
 import articleService from "../../services/board/articleService.js";
-import articleAttachService from "../../services/board/articleAttachService.js";
+import attachService from "../../services/board/attachService.js";
 import fs from "fs";
 
 /**
@@ -57,7 +57,7 @@ const downloadFile = async (req, res, next) => {
   try {
     // 다운로드 할 파일 정보 가져오기
     const { filePath, fileRealName, fileType } =
-      await articleAttachService.getFile(articleId, attachId);
+      await attachService.getAttachments(articleId, attachId);
 
     // image/로 시작하는 이미지 파일인 경우 저장된 fileType으로 contentType 설정
     // "application/octet-stream"은 바이너리 데이터 일반 형식(MIME type)을 나타내는 문자열

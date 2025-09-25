@@ -1,6 +1,19 @@
+// Sequelize DB 연결
 import dotenv from "dotenv";
-import { Sequelize } from "sequelize";
 import { queryLogger } from "../utils/logger.js";
+import { Sequelize } from "@sequelize/core";
+import { PostgresDialect } from "@sequelize/postgres";
+
+const sequelize2 = new Sequelize({
+  dialect: PostgresDialect,
+  database: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  ssl: true,
+  clientMinMessages: "notice",
+});
 
 dotenv.config();
 

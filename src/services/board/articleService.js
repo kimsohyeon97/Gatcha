@@ -2,7 +2,7 @@ import constants from "../../config/constants.js";
 import { Op } from "sequelize";
 import db from "../../models/index.js";
 import boardService from "../../services/board/boardService.js";
-import articleAttachService from "../../services/board/articleAttachService.js";
+import attachService from "./attachService.js";
 import status from "http-status";
 
 /**
@@ -139,7 +139,7 @@ const getArticle = async (articleId) => {
         required: false,
       },
       {
-        model: db.ArticleAttach,
+        model: db.Attach,
         attributes: ["id", "fileRealName", "fileSize", "fileType", "download"],
         required: false,
       },
@@ -207,7 +207,7 @@ const createArticle = async (user, body, files) => {
 
     // 첨부파일 생성
     if (attachCount > 0) {
-      await articleAttachService.createAttachments(article.id, files, {
+      await attachService.createAttachments(article.id, files, {
         transaction,
       });
     }
@@ -226,7 +226,7 @@ const updateArticle = async (articleId, user, body, files) => {
   const article = await db.Article.findOne({
     include: [
       {
-        model: db.ArticleAttach,
+        model: db.Attach,
         attributes: ["id", "fileName"],
       },
       {
@@ -259,10 +259,10 @@ const updateArticle = async (articleId, user, body, files) => {
   const transaction = await db.sequelize.transaction();
   try {
     // 게시물 첨부파일 수정
-    const attachCount = await articleAttachService.updateAttachments(
+    const attachCount = await attachService.updateAttachments(
       articleId,
       files,
-      article.articleAttaches,
+      article.attaches,
       body.attachIds,
       { transaction }
     );
@@ -320,7 +320,7 @@ const deleteArticle = async (user, articleId) => {
     });
 
     // 파일 삭제
-    await articleAttachService.deleteAttachments(article.id, { transaction });
+    await attachService.deleteAttachments(article.id, { transaction });
   } catch (err) {
     await transaction.rollback();
     throw err;

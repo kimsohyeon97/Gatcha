@@ -31,7 +31,7 @@ ArticleLog.init(
       comment: "참조테이블 ID",
     },
     actionType: {
-      type: DataTypes.ENUM,
+      type: DataTypes.ENUM("insert", "udate", "delete"),
       allowNull: false,
       field: "action_type",
       defaultValue: "insert",
